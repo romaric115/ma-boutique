@@ -1,110 +1,107 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MaBoutique — Market</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MaBoutique - Achetez et vendez facilement</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* 🌟 Style simplifié et propre */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+    }
+    header {
+      background-color: #ff6f00;
+      color: white;
+      padding: 10px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.4em;
+    }
+    nav input, nav select {
+      padding: 5px;
+      border-radius: 5px;
+      border: none;
+    }
+    main {
+      padding: 15px;
+    }
+    .product {
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 10px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .product button {
+      background: #ff6f00;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    footer {
+      background: #333;
+      color: #ddd;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <img src="https://via.placeholder.com/40x40.png?text=M" alt="logo" />
-      <h1>MaBoutique</h1>
-    </div>
 
-    <div class="search-area">
-      <input id="search" type="search" placeholder="Rechercher un produit, ex: 'chaussures'..." />
-      <select id="category-filter">
-        <option value="all">Toutes catégories</option>
+  <!-- 🧭 En-tête -->
+  <header>
+    <h1>🛍️ MaBoutique</h1>
+    <nav>
+      <input type="text" placeholder="Rechercher un produit...">
+      <select>
+        <option>Toutes catégories</option>
+        <option>Électronique</option>
+        <option>Mode</option>
+        <option>Maison</option>
       </select>
-      <button id="search-btn">🔎</button>
-    </div>
-
-    <div class="actions">
-      <button id="favorites-btn" title="Favoris">❤</button>
-      <button id="cart-btn" title="Voir le panier">🛒 <span id="cart-count">0</span></button>
-      <button id="menu-btn" class="hamburger">☰</button>
-    </div>
+      <span>🛒 <span class="cart-count">0</span></span>
+    </nav>
   </header>
 
-  <nav class="categories" id="categories-bar"></nav>
+  <!-- 🏬 Contenu principal -->
+  <main>
+    <h2>Bienvenue sur MaBoutique</h2>
+    <p>Découvrez des milliers d’articles — Achetez et vendez facilement dans le monde entier.</p>
 
-  <main class="container">
-    <section class="hero">
-      <div class="hero-text">
-        <h2>Bienvenue sur MaBoutique</h2>
-        <p>Des milliers d'articles — Achetez auprès de vendeurs du monde entier.</p>
-      </div>
-      <div class="hero-cta">
-        <button id="explore-btn">Explorer</button>
-      </div>
-    </section>
+    <!-- 💎 Exemple de produits -->
+    <div class="product">
+      <h3>Téléphone Android Pro</h3>
+      <p>Prix : 299€</p>
+      <button class="add-to-cart" data-name="Téléphone Android Pro" data-price="299">Ajouter au panier</button>
+    </div>
 
-    <section class="controls">
-      <div>
-        <label>Tri :</label>
-        <select id="sort">
-          <option value="relevance">Pertinence</option>
-          <option value="price-asc">Prix : bas → haut</option>
-          <option value="price-desc">Prix : haut → bas</option>
-        </select>
-      </div>
-      <div>
-        <label>Type :</label>
-        <select id="seller-filter">
-          <option value="all">Tous vendeurs</option>
-        </select>
-      </div>
-    </section>
+    <div class="product">
+      <h3>Casque Bluetooth</h3>
+      <p>Prix : 49€</p>
+      <button class="add-to-cart" data-name="Casque Bluetooth" data-price="49">Ajouter au panier</button>
+    </div>
 
-    <section id="products" class="products-grid"></section>
-
-    <section id="no-results" class="hidden">
-      <p>Aucun produit trouvé. Essaie un autre mot-clé.</p>
-    </section>
+    <div class="product">
+      <h3>Lunettes de soleil</h3>
+      <p>Prix : 19€</p>
+      <button class="add-to-cart" data-name="Lunettes de soleil" data-price="19">Ajouter au panier</button>
+    </div>
   </main>
 
-  <!-- Cart drawer -->
-  <aside id="cart-drawer" class="cart-drawer hidden">
-    <header>
-      <h3>🛒 Mon panier</h3>
-      <button id="close-cart">✖</button>
-    </header>
-    <div id="cart-items" class="cart-items"></div>
-    <div class="cart-footer">
-      <div class="totals">
-        <div>Articles : <span id="cart-items-count">0</span></div>
-        <div>Total : <strong id="cart-total">0.00€</strong></div>
-      </div>
-      <button id="checkout-btn" class="primary">Passer à la commande</button>
-    </div>
-  </aside>
-
-  <!-- Product modal -->
-  <div id="product-modal" class="modal hidden">
-    <div class="modal-card">
-      <button id="close-modal" class="close">✖</button>
-      <div id="modal-content"></div>
-    </div>
-  </div>
-
-  <!-- Simple checkout page (single file, simulated) -->
-  <div id="checkout-page" class="checkout-page hidden">
-    <div class="checkout-card">
-      <button id="close-checkout" class="close">✖</button>
-      <h2>Récapitulatif de la commande</h2>
-      <div id="checkout-items"></div>
-      <p>Total à payer : <strong id="checkout-total">0.00€</strong></p>
-      <p class="notice">Paiement simulé — Intégration réelle disponible (Stripe, PayPal, Flutterwave).</p>
-      <button id="confirm-payment" class="primary">Payer maintenant (simulation)</button>
-    </div>
-  </div>
-
-  <footer class="site-footer">
-    <div>© MaBoutique — Demo</div>
-    <div>Contact • À propos • CGV</div>
+  <!-- 🔻 Pied de page -->
+  <footer>
+    © 2025 MaBoutique — Contact • À propos • CGV
   </footer>
 
   <script src="script.js"></script>
