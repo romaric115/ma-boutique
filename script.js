@@ -1,57 +1,20 @@
-// === Gestion du panier ===
+// === Gestion du panier simple sans fenêtre bloquante ===
 
-// Charger le panier sauvegardé (si présent)
+// Charger le panier sauvegardé (s’il existe)
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-// Fonction pour mettre à jour l'affichage du panier
-function updateCartDisplay() {
-  const cartContainer = document.querySelector('#cart-items');
-  const cartTotal = document.querySelector('#cart-total');
-
-  if (!cartContainer || !cartTotal) return;
-
-  cartContainer.innerHTML = '';
-
-  if (cart.length === 0) {
-    cartContainer.innerHTML = '<p>Votre panier est vide.</p>';
-    cartTotal.textContent = '0.00 €';
-    return;
-  }
-
-  let total = 0;
-
-  cart.forEach((item, index) => {
-    total += item.price * item.quantity;
-
-    const productRow = document.createElement('div');
-    productRow.classList.add('cart-item');
-    productRow.innerHTML = `
-      <div>
-        <strong>${item.name}</strong><br>
-        Prix : ${item.price.toFixed(2)} €<br>
-        Quantité : ${item.quantity}
-      </div>
-      <button class="remove-btn" data-index="${index}">Supprimer</button>
-    `;
-    cartContainer.appendChild(productRow);
-  });
-
-  cartTotal.textContent = total.toFixed(2) + ' €';
-
-  // Gérer la suppression d'articles
-  document.querySelectorAll('.remove-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const index = e.target.getAttribute('data-index');
-      cart.splice(index, 1);
-      saveCart();
-      updateCartDisplay();
-    });
-  });
-}
 
 // Sauvegarder le panier dans le stockage local
 function saveCart() {
   localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+// Mettre à jour l’affichage du panier
+function updateCartDisplay() {
+  const cartCount = document.querySelector('#cart-count');
+  if (cartCount) {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCount.textContent = totalItems;
+  }
 }
 
 // Ajouter un produit au panier
@@ -64,12 +27,20 @@ function addToCart(name, price) {
   }
   saveCart();
   updateCartDisplay();
+  alert(`${name} a été ajouté au panier 🛒`);
 }
 
-// === Lier les boutons "Ajouter au panier" ===
-document.addEventListener('DOMContentLoaded', () => {
-  const addButtons = document.querySelectorAll('.add-to-cart');
+// Supprimer un produit du panier (si jamais tu veux l’ajouter plus tard)
+function removeFromCart(name) {
+  cart = cart.filter(item => item.name !== name);
+  saveCart();
+  updateCartDisplay();
+}
 
+// Initialisation après chargement de la page
+document.addEventListener('DOMContentLoaded', () => {
+  // Lier les boutons “Ajouter au panier”
+  const addButtons = document.querySelectorAll('.add-to-cart');
   addButtons.forEach(button => {
     button.addEventListener('click', () => {
       const name = button.getAttribute('data-name');
