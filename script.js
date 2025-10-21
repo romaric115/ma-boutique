@@ -1,13 +1,14 @@
-// === Gestion du panier (version sans pop-up) ===
+// === Gestion simple du panier (version stable sans pop-up) ===
 
 // Charger le panier depuis le stockage local
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Mettre à jour l'affichage du panier
+// Mettre à jour l'affichage du nombre d'articles
 function updateCartDisplay() {
   const cartCount = document.querySelector('.cart-count');
   if (cartCount) {
-    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCount.textContent = totalItems;
   }
 }
 
@@ -26,6 +27,7 @@ function addToCart(name, price) {
   }
   saveCart();
   updateCartDisplay();
+  alert(`${name} a été ajouté au panier !`);
 }
 
 // Supprimer un produit du panier
@@ -40,20 +42,20 @@ function clearCart() {
   cart = [];
   saveCart();
   updateCartDisplay();
+  alert("Le panier a été vidé.");
 }
 
-// === Liaison des boutons ===
+// === Initialisation ===
 document.addEventListener('DOMContentLoaded', () => {
-  const addButtons = document.querySelectorAll('.add-to-cart');
+  updateCartDisplay();
 
-  addButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const name = button.getAttribute('data-name');
-      const price = parseFloat(button.getAttribute('data-price'));
+  // Exemple de boutons à connecter :
+  const addButtons = document.querySelectorAll('.add-to-cart');
+  addButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.getAttribute('data-name');
+      const price = parseFloat(btn.getAttribute('data-price'));
       addToCart(name, price);
-      alert(`${name} a été ajouté au panier !`);
     });
   });
-
-  updateCartDisplay();
 });
