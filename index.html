@@ -1,107 +1,80 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MaBoutique - Achetez et vendez facilement</title>
-  <link rel="stylesheet" href="style.css">
-
-  <style>
-    /* 🌟 Style simplifié et propre */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #f9f9f9;
-    }
-    header {
-      background-color: #ff6f00;
-      color: white;
-      padding: 10px 15px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 1.4em;
-    }
-    nav input, nav select {
-      padding: 5px;
-      border-radius: 5px;
-      border: none;
-    }
-    main {
-      padding: 15px;
-    }
-    .product {
-      background: white;
-      border-radius: 10px;
-      padding: 10px;
-      margin: 10px 0;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .product button {
-      background: #ff6f00;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    footer {
-      background: #333;
-      color: #ddd;
-      text-align: center;
-      padding: 10px;
-      font-size: 0.9em;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MaBoutique - Accueil</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- 🧭 En-tête -->
-  <header>
-    <h1>🛍️ MaBoutique</h1>
+  <!-- Barre de navigation -->
+  <header class="navbar">
+    <div class="logo">🛍️ <span>MaBoutique</span></div>
     <nav>
-      <input type="text" placeholder="Rechercher un produit...">
-      <select>
-        <option>Toutes catégories</option>
-        <option>Électronique</option>
-        <option>Mode</option>
-        <option>Maison</option>
-      </select>
-      <span>🛒 <span class="cart-count">0</span></span>
+      <a href="index.html">Accueil</a>
+      <a href="produits.html">Produits</a>
+      <a href="vendeurs.html">Vendeurs</a>
+      <a href="contact.html">Contact</a>
     </nav>
+    <div class="cart-icon">🛒 <span class="cart-count">0</span></div>
   </header>
 
-  <!-- 🏬 Contenu principal -->
-  <main>
-    <h2>Bienvenue sur MaBoutique</h2>
-    <p>Découvrez des milliers d’articles — Achetez et vendez facilement dans le monde entier.</p>
+  <!-- Barre de recherche -->
+  <section class="search-section">
+    <input type="text" placeholder="Rechercher un produit..." />
+    <button>Rechercher</button>
+  </section>
 
-    <!-- 💎 Exemple de produits -->
-    <div class="product">
-      <h3>Téléphone Android Pro</h3>
-      <p>Prix : 299€</p>
-      <button class="add-to-cart" data-name="Téléphone Android Pro" data-price="299">Ajouter au panier</button>
+  <!-- Bannière de bienvenue -->
+  <section class="hero">
+    <h1>Bienvenue sur MaBoutique</h1>
+    <p>Des milliers d'articles disponibles — achetez auprès de vendeurs du monde entier !</p>
+    <button class="explore-btn">Explorer les produits</button>
+  </section>
+
+  <!-- Catégories -->
+  <section class="categories">
+    <h2>Catégories populaires</h2>
+    <div class="category-grid">
+      <div class="category">👕 Vêtements</div>
+      <div class="category">📱 Électronique</div>
+      <div class="category">🏠 Maison</div>
+      <div class="category">💄 Beauté</div>
+      <div class="category">🧸 Enfants</div>
+      <div class="category">⚙️ Accessoires</div>
     </div>
+  </section>
 
-    <div class="product">
-      <h3>Casque Bluetooth</h3>
-      <p>Prix : 49€</p>
-      <button class="add-to-cart" data-name="Casque Bluetooth" data-price="49">Ajouter au panier</button>
+  <!-- Produits en vedette -->
+  <section class="featured">
+    <h2>Produits en vedette</h2>
+    <div class="product-grid">
+      <div class="product">
+        <img src="https://via.placeholder.com/150" alt="Produit 1">
+        <h3>T-shirt coton</h3>
+        <p>Prix : 15€</p>
+        <button>Ajouter au panier</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/150" alt="Produit 2">
+        <h3>Casque Bluetooth</h3>
+        <p>Prix : 45€</p>
+        <button>Ajouter au panier</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/150" alt="Produit 3">
+        <h3>Lampe LED</h3>
+        <p>Prix : 25€</p>
+        <button>Ajouter au panier</button>
+      </div>
     </div>
+  </section>
 
-    <div class="product">
-      <h3>Lunettes de soleil</h3>
-      <p>Prix : 19€</p>
-      <button class="add-to-cart" data-name="Lunettes de soleil" data-price="19">Ajouter au panier</button>
-    </div>
-  </main>
-
-  <!-- 🔻 Pied de page -->
+  <!-- Pied de page -->
   <footer>
-    © 2025 MaBoutique — Contact • À propos • CGV
+    <p>© 2025 MaBoutique — Tous droits réservés.</p>
+    <p><a href="contact.html">Contact</a> • <a href="#">Conditions générales</a></p>
   </footer>
 
   <script src="script.js"></script>
